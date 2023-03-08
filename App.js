@@ -25,6 +25,7 @@ import {requestPermission} from './src/utils/AskPermission';
 import {ScreenStackHeaderCenterView} from 'react-native-screens';
 
 import {SafeAreaView} from 'react-native';
+import TabNavigatior from './src/component/TabsNavigator';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,7 @@ const App = ({authState}) => {
   useEffect(() => {
     requestPermission;
     const subsciber = auth().onAuthStateChanged(onAuthStateChange);
+    console.log('subsciber subsciber', subsciber)
     return subsciber;
   }, []);
 
@@ -70,25 +72,26 @@ const App = ({authState}) => {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            header: props => <CustomeHeader {...props} />,
-            headerStyle: {
-              backgroundColor: 'white',
-            },
-          }}
-
-          // screenOptions={props => <CustomeHeader {...props} />}
-        >
+        <Stack.Navigator>
           {authState.isAuthenticated ? (
             <>
-              <Stack.Screen name="Home" component={Home}></Stack.Screen>
-              <Stack.Screen name="AddPost" component={AddPost}></Stack.Screen>
+              <Stack.Screen name="Home" component={TabNavigatior} options={{
+                header: props => <CustomeHeader {...props} />,
+                headerStyle: {
+                  backgroundColor: 'white',
+                },
+              }} /> 
+              <Stack.Screen name="AddPost" component={TabNavigatior} 
+                options={{
+                  header: props => null,
+                }}
+              />
+              
             </>
           ) : (
             <>
-              <Stack.Screen name="SignIn" component={SignIn}></Stack.Screen>
-              <Stack.Screen name="SignUp" component={SignUp}></Stack.Screen>
+              <Stack.Screen name="SignIn" component={SignIn} />
+              <Stack.Screen name="SignUp" component={SignUp} />
             </>
           )}
         </Stack.Navigator>

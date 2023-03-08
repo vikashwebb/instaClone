@@ -87,7 +87,7 @@ const AddPost = ({navigation, userState}) => {
         });
       }
 
-      // console.log('userState asdf', userState.auth.user);
+      console.log('userState asdf', userState);
 
       const uid = shortid.generate();
       await database().ref(`/posts/${uid}`).set({

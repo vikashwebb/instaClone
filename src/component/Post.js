@@ -232,10 +232,11 @@ const Post = ({item, userDetail}) => {
           <ScrollView>
             <View style={styles.commentSection}>
               <View style={styles.commentSectionDis}>
-                <Image
+                {/* {userDetail.image ? <Image
                   source={{uri: userDetail.image}}
                   style={styles.userImage}
-                />
+                />: null } */}
+                {console.log("userDetail>>>>", userDetail)}
                 <View>
                   <Text style={styles.userHeaderUserName}>
                     {item.by}{' '}
